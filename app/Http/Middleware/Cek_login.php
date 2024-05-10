@@ -16,9 +16,9 @@ class Cek_login
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (\Auth::->role != 1) {
-            return response()->json('Opps! You do not have permission to access.');
-        }
+        // if (\Auth::->role != 1) {
+        //     return response()->json('Opps! You do not have permission to access.');
+        // }
         return $next($request);
     }
 }
