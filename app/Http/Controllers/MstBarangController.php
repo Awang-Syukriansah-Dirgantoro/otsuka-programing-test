@@ -7,6 +7,7 @@ use App\Http\Requests\Updatemst_barangRequest;
 use App\Models\mst_barang;
 use App\Models\mst_category_barang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MstBarangController extends Controller
 {
@@ -15,9 +16,11 @@ class MstBarangController extends Controller
      */
     public function index()
     {
+        // dd(Auth::guard('user')->user()->role);
+        $role = Auth::guard('user')->user()->role;
         $category = mst_category_barang::get()->all();
         $barang = mst_barang::get()->all();
-        return view('product')->with('category', $category)->with('barang', $barang);
+        return view('product')->with('category', $category)->with('barang', $barang)->with('role', $role);
     }
 
     /**
@@ -34,7 +37,6 @@ class MstBarangController extends Controller
     public function store(Request $request)
     {
         //
-        // dd($request->nama);
         $imagepath = "";
         $filename = time().'.'.$request->image->getClientOriginalExtension();
         $request->image->move(public_path('images'), $filename);

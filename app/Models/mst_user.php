@@ -20,4 +20,10 @@ class mst_user extends Authenticatable
         'password',
         'role',
     ];
+    protected function casts(): array
+    {
+        return [
+            'password' => 'hashed',
+        ];
+    }
 }

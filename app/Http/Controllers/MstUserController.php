@@ -20,28 +20,8 @@ class MstUserController extends Controller
     }
 
     public function handleLogin(Request $request) {
-        // request()->validate(
-        //     [
-        //         'username' => 'required',
-        //         'password' => 'required',
-        //     ]);
-
-        //     $kredensil = $request->only('username','password');
-
-        //     if (Auth::guard('user')->attempt($kredensil)) {
-        //         $user = Auth::user();
-        //         if ($user->level == 'admin') {
-        //             return redirect()->intended('home');
-        //         } elseif ($user->level == 'editor') {
-        //             return redirect()->intended('home');
-        //         }
-        //         return redirect()->intended('/');
-        //     }
-
-        // return redirect('login')
-        // $kredensil = $request->only('username','password');
         if (Auth::guard('user')->attempt(['username'=> $request->username,'password'=>$request->password], $request->remember)){
-            return redirect('home');
+            return redirect('product');
         }
         return view('login');
     }

@@ -26,21 +26,21 @@ class MstUserSeeder extends Seeder
         DB::table('mst_users')->insert([
             'name' => 'admin',
             'username' => 'admin',
-            'password' => 'password',
+            'password' => Hash::make('password'),
             'role' => 'admin'
         ]);
 
         DB::table('mst_users')->insert([
             'name' => 'user',
             'username' => 'user',
-            'password' => 'password',
+            'password' => Hash::make('password'),
             'role' => 'pengguna'
         ]);
 
         DB::table('mst_users')->insert([
             'name' => 'approval',
             'username' => 'approval',
-            'password' => 'password',
+            'password' => Hash::make('password'),
             'role' => 'approval'
         ]);
     }

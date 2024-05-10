@@ -34,7 +34,9 @@
                             <th scope="col">Category</th>
                             <th scope="col">Image</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Action</th>
+                            @if ($role === 'approval')
+                                <th scope="col">Action</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -44,7 +46,7 @@
                                 <th scope="col">{{ $item->nama }}</th>
                                 <th scope="col">
                                     @foreach ($category as $cat)
-                                        @if ($cat->id === $item->id_category )
+                                        @if ($cat->id === $item->id_category)
                                             {{ $cat->nama }}
                                         @endif
                                     @endforeach
@@ -52,14 +54,17 @@
                                 <th scope="col"><img style="height: 100px; object-fit: cover"
                                         src="images/{{ $item->image }}" alt=""></th>
                                 <th scope="col">{{ $item->status }}</th>
-                                <th scope="col">
-                                    <a href="{{ route('barang.approval', ['id'=>$item->id,'status'=>'approve']) }}">
-                                        <button type="button" class="btn btn-success">Approve</button>
-                                    </a>
-                                    <a href="{{ route('barang.approval', ['id'=>$item->id,'status'=>'reject']) }}">
-                                        <button type="button" class="btn btn-danger">Rejected</button>
-                                    </a>
-                                </th>
+                                @if ($role === 'approval')
+                                    <th scope="col">
+                                        <a
+                                            href="{{ route('barang.approval', ['id' => $item->id, 'status' => 'approve']) }}">
+                                            <button type="button" class="btn btn-success">Approve</button>
+                                        </a>
+                                        <a href="{{ route('barang.approval', ['id' => $item->id, 'status' => 'reject']) }}">
+                                            <button type="button" class="btn btn-danger">Rejected</button>
+                                        </a>
+                                    </th>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>
